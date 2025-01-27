@@ -1,138 +1,116 @@
-<!-- Seção de Produtos -->
-<section class="products">
-    <h2>Produtos em Destaque</h2>
-    <div class="product-list">
-        <!-- Produto 1 -->
-        <div class="product-card">
-            <img src="images/produto1.jpg" alt="Perfume A">
-            <h3>Perfume A</h3>
-            <p class="product-description">Um perfume floral, suave e sofisticado para o seu dia a dia.</p>
-            <p class="product-price">R$ 129,90</p>
-            
-            <!-- Avaliação de Estrelas -->
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">☆</span>
-                <span class="star">☆</span>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Só Importados - Marketplace</title>
+    <link rel="stylesheet" href="css/produto.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Só Importados">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="search-cart">
+            <input type="text" placeholder="Buscar produtos...">
+            <button>Pesquisar</button>
+            <button>Carrinho</button>
+        </div>
+    </header>
+
+    <!-- Seção de Produtos -->
+    <section class="products">
+        <h2>Produtos em Destaque</h2>
+        <div class="product-list">
+            <!-- Produto 1 -->
+            <div class="product-card">
+                <img src="images/produto1.jpg" alt="Perfume A">
+                <h3>Perfume A</h3>
+                <p class="product-description">Um perfume floral, suave e sofisticado para o seu dia a dia.</p>
+                <p class="product-price">R$ 129,90</p>
+                
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                    <span class="star">☆</span>
+                </div>
+
+                <div class="product-actions">
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    <button class="buy-now">Comprar Agora</button>
+                </div>
             </div>
 
-            <div class="product-actions">
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
-                <button class="buy-now">Comprar Agora</button>
+            <!-- Produto 2 -->
+            <div class="product-card">
+                <img src="images/produto2.jpg" alt="Perfume B">
+                <h3>Perfume B</h3>
+                <p class="product-description">Perfume amadeirado, ideal para ocasiões especiais e elegantes.</p>
+                <p class="product-price">R$ 149,90</p>
+                
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                </div>
+
+                <div class="product-actions">
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    <button class="buy-now">Comprar Agora</button>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="product-card">
+                <img src="images/produto3.jpg" alt="Perfume C">
+                <h3>Perfume C</h3>
+                <p class="product-description">Uma fragrância marcante, com notas frutais e florais que encantam.</p>
+                <p class="product-price">R$ 179,90</p>
+                
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+
+                <div class="product-actions">
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    <button class="buy-now">Comprar Agora</button>
+                </div>
+            </div>
+
+            <!-- Mais produtos aqui... -->
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Só Importados. Todos os direitos reservados.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
             </div>
         </div>
+    </footer>
+</body>
 
-        <!-- Produto 2 -->
-        <div class="product-card">
-            <img src="images/produto2.jpg" alt="Perfume B">
-            <h3>Perfume B</h3>
-            <p class="product-description">Perfume amadeirado, ideal para ocasiões especiais e elegantes.</p>
-            <p class="product-price">R$ 149,90</p>
-            
-            <!-- Avaliação de Estrelas -->
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">☆</span>
-            </div>
-
-            <div class="product-actions">
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
-                <button class="buy-now">Comprar Agora</button>
-            </div>
-        </div>
-
-        <!-- Produto 3 -->
-        <div class="product-card">
-            <img src="images/produto3.jpg" alt="Perfume C">
-            <h3>Perfume C</h3>
-            <p class="product-description">Uma fragrância marcante, com notas frutais e florais que encantam.</p>
-            <p class="product-price">R$ 179,90</p>
-            
-            <!-- Avaliação de Estrelas -->
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-            </div>
-
-            <div class="product-actions">
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
-                <button class="buy-now">Comprar Agora</button>
-            </div>
-        </div>
-
-        <!-- Produto 4 -->
-        <div class="product-card">
-            <img src="images/produto4.jpg" alt="Perfume D">
-            <h3>Perfume D</h3>
-            <p class="product-description">Fragrância vibrante e fresca, ideal para os dias quentes de verão.</p>
-            <p class="product-price">R$ 109,90</p>
-            
-            <!-- Avaliação de Estrelas -->
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">☆</span>
-                <span class="star">☆</span>
-            </div>
-
-            <div class="product-actions">
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
-                <button class="buy-now">Comprar Agora</button>
-            </div>
-        </div>
-
-        <!-- Produto 5 -->
-        <div class="product-card">
-            <img src="images/produto5.jpg" alt="Perfume E">
-            <h3>Perfume E</h3>
-            <p class="product-description">Uma essência sensual e sofisticada para a noite.</p>
-            <p class="product-price">R$ 159,90</p>
-            
-            <!-- Avaliação de Estrelas -->
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-            </div>
-
-            <div class="product-actions">
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
-                <button class="buy-now">Comprar Agora</button>
-            </div>
-        </div>
-
-        <!-- Produto 6 -->
-        <div class="product-card">
-            <img src="images/produto6.jpg" alt="Perfume F">
-            <h3>Perfume F</h3>
-            <p class="product-description">Perfume com um toque ambarado e misterioso, perfeito para a noite.</p>
-            <p class="product-price">R$ 199,90</p>
-            
-            <!-- Avaliação de Estrelas -->
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">☆</span>
-            </div>
-
-            <div class="product-actions">
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
-                <button class="buy-now">Comprar Agora</button>
-            </div>
-        </div>
-
-    </div>
-</section>
+</html>
