@@ -1,0 +1,115 @@
+/* Produtos */
+.products {
+    padding: 40px 20px;
+    background-color: white;
+    margin-top: 100px;
+}
+
+.products h2 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-items: center;
+}
+
+/* Estilo dos cartões de produto */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.product-card .product-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.product-card .product-price {
+    font-size: 18px;
+    color: #e60012;
+    margin-top: 15px;
+}
+
+.rating {
+    margin-top: 10px;
+    color: #f4b400;
+}
+
+.rating .star {
+    font-size: 18px;
+}
+
+/* Botões */
+.product-actions {
+    margin-top: 20px;
+}
+
+.product-actions button {
+    background-color: #ff4081;
+    padding: 12px 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.product-actions button:hover {
+    background-color: #d50057;
+}
+
+/* Botão "Comprar Agora" */
+.product-actions .buy-now {
+    background-color: #00bcd4;
+}
+
+.product-actions .buy-now:hover {
+    background-color: #008c99;
+}
+
+/* Responsividade para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+}
