@@ -1,0 +1,105 @@
+/* Resetando estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo geral */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Cabeçalho */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #e60012; /* Cor principal da marca */
+    color: white;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+header .logo img {
+    max-width: 150px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+header nav ul li {
+    position: relative;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Seção Sobre Nós */
+.sobre-nos {
+    padding: 80px 20px;
+    background-color: #fff;
+}
+
+.sobre-nos h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.sobre-nos .container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sobre-nos p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.sobre-nos h2 {
+    font-size: 28px;
+    margin-top: 40px;
+    font-weight: 600;
+}
+
+.sobre-nos ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.sobre-nos ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Rodapé */
+footer {
+    background-color: #e60012;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+footer .social-media a {
+    color: white;
+    margin: 0 15px;
+    font-size: 20px;
+}
