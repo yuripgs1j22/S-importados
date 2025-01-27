@@ -1,5 +1,4 @@
-/* Resetando estilos básicos */
-* {
+|*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -41,24 +40,31 @@ header nav ul li {
     position: relative;
 }
 
-/* Estilos do Menu Suspenso */
-header nav ul li .dropdown-content {
-    display: none; /* Esconde o menu suspenso inicialmente */
-    position: absolute;
-    top: 100%; /* Coloca o menu logo abaixo do item */
-    left: 0;
-    background-color: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    display: flex; /* Exibe os itens em linha */
-    flex-wrap: wrap; /* Permite quebra de linha caso os itens não caibam */
-    gap: 15px; /* Espaçamento entre os itens */
-    padding: 10px 20px;
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-/* Exibe o menu quando o mouse passa sobre o item "Perfumaria" */
+header .nav ul li a:hover {
+    color: #ff4081;
+}
+
+/* Estilos do Menu Suspenso */
+header nav ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
 header nav ul li:hover .dropdown-content {
-    display: flex; /* Exibe o menu ao passar o mouse */
+    display: block;
 }
 
 header nav ul li .dropdown-content a {
@@ -69,7 +75,6 @@ header nav ul li .dropdown-content a {
     font-size: 14px;
 }
 
-/* Estilo de hover para os itens do menu */
 header nav ul li .dropdown-content a:hover {
     background-color: #f4f4f4;
     color: #ff4081;
@@ -239,10 +244,5 @@ footer .payment-methods img {
 
     .product-list {
         flex-direction: column;
-    }
-
-    /* Responsividade do menu suspenso */
-    header nav ul li .dropdown-content {
-        flex-direction: column; /* Coloca os itens em coluna em telas menores */
     }
 }
