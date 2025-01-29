@@ -265,7 +265,7 @@ footer .payment-methods img {
     position: relative;
     width: 80%; /* Largura ajustada */
     max-width: 1000px; /* Tamanho máximo */
-   
+    margin: 230px auto 0 auto; /* Ajustando a margem superior para descer o carrossel */
     overflow: hidden;
     height: 400px; /* Altura ajustada */
 }
