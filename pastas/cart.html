@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Loja Só Importados</title>
+    <link rel="stylesheet" href="css/style.css">
+
+      
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="logo">
+            <img src="photos/logo.jpg" alt="Logo Só Importados">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="promocoes.html">Promoções</a></li>
+                <li><a href="sobrenos.html">Sobre Nós</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Carrinho de Compras -->
+    <section class="cart-container">
+        <h2>Seu Carrinho de Compras</h2>
+
+        <div id="cart-items-list"></div>
+
+        <div class="cart-summary">
+            <h3>Total:</h3>
+            <p id="total-price">R$ 0,00</p>
+            <button class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <ul>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="#">Termos de Uso</a></li>
+            </ul>
+        </div>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+        <div class="payment-methods">
+            <img src="images/payment-icons.png" alt="Métodos de Pagamento">
+        </div>
+    </footer>
+
+    <script>
+        // Recuperar itens do carrinho armazenados no localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Função para exibir os itens no carrinho
+        function displayCartItems() {
+            const cartItemsList = document.getElementById('cart-items-list');
+            cartItemsList.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p>Seu carrinho está vazio.</p>';
+            } else {
+                let totalPrice = 0;
+                cart.forEach(item => {
+                    totalPrice += item.price;
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('cart-item');
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item-info">
+                            <img src="${item.img}" alt="${item.name}">
+                            <div>
+                                <h4>${item.name}</h4>
+                                <p>R$ ${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsList.appendChild(cartItemElement);
+                });
+
+                // Atualizar o preço total
+                const totalPriceElement = document.getElementById('total-price');
+                totalPriceElement.textContent = `R$ ${totalPrice.toFixed(2)}`;
+            }
+        }
+
+        // Exibir os itens do carrinho ao carregar a página
+        displayCartItems();
+    </script>
+</body>
+</html>

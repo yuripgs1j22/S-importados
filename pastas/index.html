@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja só importados - Perfumes e Cosméticos</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilo para afastar o botão do carrinho do canto */
+        .search-cart button#cart-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff9900;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        
+        .search-cart button#cart-btn:hover {
+            background-color: #ff7f00;
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
@@ -12,9 +33,9 @@
         <div class="logo">
             <img src="photos/logo.jpg" alt="Logo Só Importados">
         </div>
-        <nav class="nav">
+        <nav>
             <ul>
-                <li><a href="index.html">Início</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="promocoes.html">Promoções</a></li>
                 <li class="dropdown">
                     <a href="#">Perfumarias</a>
@@ -35,35 +56,37 @@
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
                        
-                    </div>
                 </li>
-                <li><a href="sobrenos.html">Sobre Nós</a></li>
-                <li>
-                    <a href="#">Contato</a>
-                    <div class="dropdown-content">
-                        <a href="mailto:contato@empresa.com">Email</a>
-                        <a href="https://www.instagram.com/empresa" target="_blank">Instagram</a>
-                        <a href="tel:+5511999999999">Telefone</a>
-                        <a href="#">WhatsApp</a>
-                        <a href="#">Facebook</a>
-                    </div>
-                </li>
+                <li><a href="#">Contato</a></li>
             </ul>
         </nav>
         <div class="search-cart">
-            <input type="text" placeholder="Buscar produtos...">
-            <button>Pesquisar</button>
-            <button>Carrinho</button>
+           
+           
+            <!-- Carrinho com contador de itens (redirecionando para a página do carrinho) -->
+            <a href="cart.html">
+                <button id="cart-btn">
+                    Carrinho (<span id="cart-count">0</span>)
+                </button>
+            </a>
         </div>
     </header>
-    
-    <!-- Banner Principal -->
-    <section class="banner">
-        <h1>Perfumes e Cosméticos de Qualidade</h1>
-        <p>Descubra nossas ofertas especiais e promoções incríveis.</p>
-        <button class="shop-now">Comprar Agora</button>
+
+    <!-- Carrossel de Produtos -->
+    <section class="carousel-container">
+        <div class="carousel-images">
+            <div class="carousel-image">
+                <img src="photos/Perfume A.png" alt="Perfume 1">
+            </div>
+            <div class="carousel-image">
+                <img src="photos/Perfume b.png" alt="Perfume 2">
+            </div>
+            <div class="carousel-image">
+                <img src="photos/boos.png" alt="Perfume 3">
+            </div>
+        </div>
     </section>
-    
+
     <!-- Seção de Produtos -->
     <section class="products">
         <h2>Produtos em Destaque</h2>
@@ -72,19 +95,19 @@
                 <img src="photos/Perfume A.png">
                 <h3>Red wepink</h3>
                 <p>R$ 129,90</p>
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
+                <button class="add-to-cart" data-product="Red wepink" data-price="129.90">Adicionar ao Carrinho</button>
             </div>
             <div class="product-card">
                 <img src="photos/Perfume b.png">
                 <h3>Make B</h3>
                 <p>R$ 149,90</p>
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
+                <button class="add-to-cart" data-product="Make B" data-price="149.90">Adicionar ao Carrinho</button>
             </div>
             <div class="product-card">
                 <img src="photos/boos.png">
                 <h3>Hugo boss</h3>
                 <p>R$ 199,90</p>
-                <button class="add-to-cart">Adicionar ao Carrinho</button>
+                <button class="add-to-cart" data-product="Hugo boss" data-price="199.90">Adicionar ao Carrinho</button>
             </div>
         </div>
     </section>
@@ -108,6 +131,33 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // Carrinho de Compras
+        let cart = [];
+        const cartCount = document.getElementById('cart-count');
+        
+        // Função para atualizar o contador do carrinho
+        function updateCartCount() {
+            cartCount.textContent = cart.length;
+        }
+
+        // Função para adicionar ao carrinho
+        function addToCart(productName, productPrice) {
+            const product = { name: productName, price: parseFloat(productPrice) };
+            cart.push(product);
+            updateCartCount();
+        }
+
+        // Adicionar eventos para os botões "Adicionar ao Carrinho"
+        const addButtons = document.querySelectorAll('.add-to-cart');
+        addButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productName = button.getAttribute('data-product');
+                const productPrice = button.getAttribute('data-price');
+                addToCart(productName, productPrice);
+            });
+        });
+        
+    </script>
 </body>
 </html>

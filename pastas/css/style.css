@@ -34,10 +34,12 @@ header nav ul {
     list-style: none;
     display: flex;
     gap: 30px;
+    
 }
 
 header nav ul li {
     position: relative;
+    
 }
 
 header nav ul li a {
@@ -253,3 +255,138 @@ footer .payment-methods img {
     height: auto; /* Mantém a proporção da imagem */
     border-radius: 50%; /* Arredonda a imagem, fazendo ela ficar circular */
 }
+
+
+
+
+
+/* Estilos para o carrossel */
+.carousel-container {
+    position: relative;
+    width: 80%; /* Largura ajustada */
+    max-width: 1000px; /* Tamanho máximo */
+   
+    overflow: hidden;
+    height: 400px; /* Altura ajustada */
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-image {
+    min-width: 30%;
+    box-sizing: border-box;
+}
+
+.carousel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* A imagem cobre toda a área do carrossel */
+    object-position: center; /* Centraliza a imagem dentro do carrossel */
+}
+
+.carousel-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+
+  /* Estilos do Carrinho */
+  .cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cart-item img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.cart-summary {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.cart-summary h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.cart-summary p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.btn-checkout {
+    background-color: #ff9900;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.btn-checkout:hover {
+    background-color: #ff7f00;
+}
+
+
+/* Centraliza os itens de navegação */
+.nav {
+    display: flex;
+    justify-content: center;  /* Centraliza os itens horizontalmente */
+    width: 100%;
+}
+
+.nav ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.nav li {
+    margin: 0 15px;  /* Espaçamento entre os itens */
+}
+
+.nav a {
+    display: block;  /* Faz o link ocupar toda a área do <li> */
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;  /* Espaçamento interno para os links */
+    text-align: center;  /* Centraliza o texto dentro do link */
+}
+
+h2{ 
+    margin: 100px auto 0 auto; /* Ajustando a margem superior para descer o carrossel */
+}
+
