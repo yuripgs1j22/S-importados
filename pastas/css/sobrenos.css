@@ -103,3 +103,8 @@ footer .social-media a {
     margin: 0 15px;
     font-size: 20px;
 }
+.logo img {
+    width: 120px; /* Ajuste o tamanho da logo conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 50%; /* Arredonda a imagem, fazendo ela ficar circular */
+}
