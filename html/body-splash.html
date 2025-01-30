@@ -7,6 +7,39 @@
     <title>Perfumes Body Splash - Loja Online</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* Estilos para o ícone do carrinho */
+        .cart-icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-icon img {
+            width: 40px; /* Tamanho pequeno */
+            height: 40px; /* Tamanho pequeno */
+            border-radius: 50%; /* Deixa a imagem arredondada */
+            border: 2px solid #fff; /* Borda branca para dar destaque */
+        }
+
+        /* Estilo para o contador de itens */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -37,7 +70,7 @@
                         <a href="aromatico.html">Aromático</a>
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
-                       
+                    </div>
                 </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
@@ -45,33 +78,40 @@
         <div class="search">
             <input type="text" placeholder="Buscar...">
         </div>
+
+        <!-- Ícone do Carrinho -->
+        <div class="cart-icon">
+            <a href="cart.html">
+                <img src="../photos/carrinho.png" alt="Carrinho">
+                <span id="cart-count">0</span> <!-- Contador de itens no carrinho -->
+            </a>
+        </div>
     </header>
 
-    
     <!-- Produtos Body Splash -->
     <section class="products">
         <h2>Body Splash</h2>
         <div class="product-list">
             <div class="product-card">
-                <img src="../photos/Body Splash Frutas Tropicais.webp">
+                <img src="../photos/Body Splash Frutas Tropicais.webp" alt="Body Splash Frutas Tropicais">
                 <h3>Body Splash Frutas Tropicais</h3>
                 <p>Refrescante, com notas de frutas tropicais que envolvem e perfumam levemente a pele.</p>
                 <p class="price">R$ 45,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Body Splash Frutas Tropicais', 45.00, '../photos/Body Splash Frutas Tropicais.webp')">Comprar</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Body Splash Floral Delicado.webp">
+                <img src="../photos/Body Splash Floral Delicado.webp" alt="Body Splash Floral Delicado">
                 <h3>Body Splash Floral Delicado</h3>
                 <p>Fragrância suave e floral, ideal para quem busca um toque delicado e fresco.</p>
                 <p class="price">R$ 40,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Body Splash Floral Delicado', 40.00, '../photos/Body Splash Floral Delicado.webp')">Comprar</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Body Splash Cítrico Refrescante.webp">
+                <img src="../photos/Body Splash Cítrico Refrescante.webp" alt="Body Splash Cítrico Refrescante">
                 <h3>Body Splash Cítrico Refrescante</h3>
                 <p>Uma explosão de frescor com notas cítricas, perfeito para o calor e para um dia ativo.</p>
                 <p class="price">R$ 50,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Body Splash Cítrico Refrescante', 50.00, '../photos/Body Splash Cítrico Refrescante.webp')">Comprar</button>
             </div>
         </div>
     </section>
@@ -104,8 +144,49 @@
             <a href="#" class="instagram">Instagram</a>
             <a href="#" class="twitter">Twitter</a>
         </div>
-       
     </footer>
+
+    <script>
+        // Função para adicionar produto ao carrinho
+        function addToCart(name, price, img) {
+            const product = {
+                name: name,
+                price: price,
+                img: img,
+                quantity: 1
+            };
+
+            // Recupera o carrinho atual do localStorage ou cria um novo
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Verifica se o produto já está no carrinho
+            const existingProductIndex = cart.findIndex(item => item.name === name);
+
+            if (existingProductIndex >= 0) {
+                // Caso o produto já exista no carrinho, atualiza a quantidade
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                // Caso contrário, adiciona o produto ao carrinho
+                cart.push(product);
+            }
+
+            // Atualiza o localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Atualiza o contador de itens no carrinho
+            updateCartCount();
+        }
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Atualizar o contador ao carregar a página
+        window.onload = updateCartCount;
+    </script>
 
 </body>
 </html>

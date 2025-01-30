@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,38 @@
     <title>Promoções - Loja Online de Perfumes</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilos para o ícone do carrinho */
+        .cart-icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Estilo para o contador de itens */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -37,7 +69,7 @@
                         <a href="aromatico.html">Aromático</a>
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
-                       
+                    </div>
                 </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
@@ -45,9 +77,16 @@
         <div class="search">
             <input type="text" placeholder="Buscar...">
         </div>
+
+        <!-- Ícone do Carrinho -->
+        <div class="cart-icon">
+            <a href="cart.html">
+                <img src="../photos/carrinho.png" alt="Carrinho">
+                <span id="cart-count">0</span>
+            </a>
+        </div>
     </header>
 
-    
     <!-- Produtos em Promoção -->
     <section class="products">
         <h2>Perfumes em Promoção</h2>
@@ -57,21 +96,21 @@
                 <h3>Perfume Floral Encantado</h3>
                 <p>Uma mistura delicada de flores e frutas, ideal para qualquer ocasião. Aproveite o desconto e leve para casa!</p>
                 <p class="price">De <span class="old-price">R$ 180,00</span> por <span class="new-price">R$ 120,00</span></p>
-                <button>Comprar</button>
+                <button class="add-to-cart" data-product="Perfume Floral Encantado" data-price="120">Adicionar ao carrinho</button>
             </div>
             <div class="product-card">
                 <img src="../photos/Perfume Doce Magia Infantil6.jpg">
                 <h3>Perfume Doce Magia</h3>
                 <p>Fragrância suave e envolvente com notas de baunilha e frutas. Uma oferta imperdível!</p>
                 <p class="price">De <span class="old-price">R$ 160,00</span> por <span class="new-price">R$ 110,00</span></p>
-                <button>Comprar</button>
+                <button class="add-to-cart" data-product="Perfume Doce Magia" data-price="110">Adicionar ao carrinho</button>
             </div>
             <div class="product-card">
                 <img src="../photos/Perfume Elegância Noturna455.webp">
                 <h3>Perfume Elegância Noturna</h3>
                 <p>Perfume sofisticado com notas de rosas e âmbar. Ideal para a noite, agora com um preço especial!</p>
                 <p class="price">De <span class="old-price">R$ 220,00</span> por <span class="new-price">R$ 150,00</span></p>
-                <button>Comprar</button>
+                <button class="add-to-cart" data-product="Perfume Elegância Noturna" data-price="150">Adicionar ao carrinho</button>
             </div>
         </div>
     </section>
@@ -104,8 +143,53 @@
             <a href="#" class="instagram">Instagram</a>
             <a href="#" class="twitter">Twitter</a>
         </div>
-    
     </footer>
+
+    <script>
+        // Função para adicionar produto ao carrinho
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                const productName = this.getAttribute('data-product');
+                const productPrice = this.getAttribute('data-price');
+
+                const product = {
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    quantity: 1
+                };
+
+                // Recupera o carrinho atual do localStorage ou cria um novo
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Verifica se o produto já está no carrinho
+                const existingProductIndex = cart.findIndex(item => item.name === productName);
+
+                if (existingProductIndex >= 0) {
+                    // Caso o produto já exista no carrinho, atualiza a quantidade
+                    cart[existingProductIndex].quantity += 1;
+                } else {
+                    // Caso contrário, adiciona o produto ao carrinho
+                    cart.push(product);
+                }
+
+                // Atualiza o localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Atualiza o contador de itens no carrinho
+                updateCartCount();
+            });
+        });
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Atualizar o contador ao carregar a página
+        window.onload = updateCartCount;
+    </script>
 
 </body>
 </html>

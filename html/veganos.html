@@ -7,13 +7,45 @@
     <title>Perfumes Veganos - Loja Online</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilos para o ícone do carrinho */
+        .cart-icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Estilo para o contador de itens */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
     <!-- Cabeçalho -->
     <header>
         <div class="logo">
-            <img src="photos/logo.jpg" alt="Logo da Loja">
+            <img src="../photos/logo.jpg" alt="Logo da Loja">
         </div>
         <nav>
             <ul>
@@ -37,41 +69,45 @@
                         <a href="aromatico.html">Aromático</a>
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
-                       
+                    </div>
                 </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
-        </nav>  
-        <div class="search">
-            <input type="text" placeholder="Buscar...">
+        </nav>
+
+        <!-- Ícone do Carrinho -->
+        <div class="cart-icon">
+            <a href="cart.html">
+                <img src="../photos/carrinho.png" alt="Carrinho">
+                <span id="cart-count">0</span>
+            </a>
         </div>
     </header>
 
-    
     <!-- Produtos Perfumes Veganos -->
     <section class="products">
         <h2>Perfumes Veganos</h2>
         <div class="product-list">
             <div class="product-card">
-                <img src="../photos/Perfume Vegano Floral Harmonia.webp">
+                <img src="../photos/Perfume Vegano Floral Harmonia.webp" alt="Perfume Vegano Floral Harmonia">
                 <h3>Perfume Vegano Floral Harmonia</h3>
                 <p>Uma combinação delicada de flores e frutas, livre de qualquer ingrediente animal.</p>
                 <p class="price">R$ 120,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Vegano Floral Harmonia', 120)">Comprar</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Perfume Vegano Cítrico Energizante.jpg">
+                <img src="../photos/Perfume Vegano Cítrico Energizante.jpg" alt="Perfume Vegano Cítrico Energizante">
                 <h3>Perfume Vegano Cítrico Energizante</h3>
                 <p>Notas de frutas cítricas refrescantes, ideal para quem busca uma fragrância leve e energizante.</p>
                 <p class="price">R$ 110,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Vegano Cítrico Energizante', 110)">Comprar</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Perfume Vegano Amadeirado Tradição.jpg">
+                <img src="../photos/Perfume Vegano Amadeirado Tradição.jpg" alt="Perfume Vegano Amadeirado Tradição">
                 <h3>Perfume Vegano Amadeirado Tradição</h3>
                 <p>Uma fragrância marcante com toques amadeirados e terrosos, totalmente livre de crueldade.</p>
                 <p class="price">R$ 150,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Vegano Amadeirado Tradição', 150)">Comprar</button>
             </div>
         </div>
     </section>
@@ -80,7 +116,7 @@
     <section class="sobre-nos">
         <h1>Sobre a Nossa Loja</h1>
         <div class="container">
-            <p>Na nossa loja, além de perfumes femininos, masculinos, unissex, infantis, para casa, kids, pocket size e body splash, agora você também encontra **perfumes veganos**! Trabalhamos com fragrâncias 100% livres de ingredientes de origem animal, oferecendo opções sofisticadas, frescas e envolventes para quem busca produtos éticos e de qualidade.</p>
+            <p>Na nossa loja, além de perfumes femininos, masculinos, unissex, infantis, para casa, kids, pocket size e body splash, agora você também encontra <strong>perfumes veganos</strong>! Trabalhamos com fragrâncias 100% livres de ingredientes de origem animal, oferecendo opções sofisticadas, frescas e envolventes para quem busca produtos éticos e de qualidade.</p>
             <h2>Por que Escolher Nossos Perfumes Veganos?</h2>
             <ul>
                 <li>Fragrâncias livres de ingredientes de origem animal.</li>
@@ -104,8 +140,39 @@
             <a href="#" class="instagram">Instagram</a>
             <a href="#" class="twitter">Twitter</a>
         </div>
-      
     </footer>
+
+    <script>
+        // Função para adicionar produtos ao carrinho
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const product = { name, price, quantity: 1 };
+
+            // Verifica se o produto já está no carrinho
+            const existingProduct = cart.find(item => item.name === name);
+            if (existingProduct) {
+                existingProduct.quantity += 1; // Se já estiver, aumenta a quantidade
+            } else {
+                cart.push(product); // Se não estiver, adiciona ao carrinho
+            }
+
+            // Salva o carrinho no localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Atualiza o contador de itens no carrinho
+            updateCartCount();
+        }
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Atualiza o contador ao carregar a página
+        window.onload = updateCartCount;
+    </script>
 
 </body>
 </html>

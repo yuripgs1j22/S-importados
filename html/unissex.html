@@ -7,6 +7,38 @@
     <title>Perfumes - Loja Online</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilos para o ícone do carrinho */
+        .cart-icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Estilo para o contador de itens */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -37,42 +69,45 @@
                         <a href="aromatico.html">Aromático</a>
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
-                       
+                    </div>
                 </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
         </nav>
-        <div class="search">
-            <input type="text" placeholder="Buscar...">
+
+        <!-- Ícone do Carrinho -->
+        <div class="cart-icon">
+            <a href="cart.html">
+                <img src="../photos/carrinho.png" alt="Carrinho">
+                <span id="cart-count">0</span>
+            </a>
         </div>
     </header>
-
-   
 
     <!-- Produtos Unissex -->
     <section class="products">
         <h2>Perfumes Unissex</h2>
         <div class="product-list">
             <div class="product-card">
-                <img src="../photos/Perfume Noite Elegante.jpg">
+                <img src="../photos/Perfume Noite Elegante.jpg" alt="Perfume Noite Elegante">
                 <h3>Perfume Noite Elegante</h3>
                 <p>Fragrância sofisticada e fresca, ideal para qualquer ocasião.</p>
                 <p class="price">R$ 120,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Noite Elegante', 120)">Comprar</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Perfume Essência de Verão.jpg">
+                <img src="../photos/Perfume Essência de Verão.jpg" alt="Perfume Essência de Verão">
                 <h3>Perfume Essência de Verão</h3>
                 <p>Uma mistura refrescante e leve, perfeita para o clima quente.</p>
                 <p class="price">R$ 135,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Essência de Verão', 135)">Comprar</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Perfume Aventura Urbana.jpg">
+                <img src="../photos/Perfume Aventura Urbana.jpg" alt="Perfume Aventura Urbana">
                 <h3>Perfume Aventura Urbana</h3>
                 <p>Perfume com notas de madeira e cítricos, para os amantes de experiências intensas.</p>
                 <p class="price">R$ 150,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Aventura Urbana', 150)">Comprar</button>
             </div>
         </div>
     </section>
@@ -105,8 +140,39 @@
             <a href="#" class="instagram">Instagram</a>
             <a href="#" class="twitter">Twitter</a>
         </div>
-        
     </footer>
+
+    <script>
+        // Função para adicionar produtos ao carrinho
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const product = { name, price, quantity: 1 };
+
+            // Verifica se o produto já está no carrinho
+            const existingProduct = cart.find(item => item.name === name);
+            if (existingProduct) {
+                existingProduct.quantity += 1; // Se já estiver, aumenta a quantidade
+            } else {
+                cart.push(product); // Se não estiver, adiciona ao carrinho
+            }
+
+            // Salva o carrinho no localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Atualiza o contador de itens no carrinho
+            updateCartCount();
+        }
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Atualiza o contador ao carregar a página
+        window.onload = updateCartCount;
+    </script>
 
 </body>
 </html>

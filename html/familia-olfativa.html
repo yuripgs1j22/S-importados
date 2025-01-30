@@ -7,6 +7,38 @@
     <title>Perfumes Família Olfativa - Loja Online</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Estilos para o ícone do carrinho */
+        .cart-icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        /* Estilo para o contador de itens */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -37,7 +69,7 @@
                         <a href="aromatico.html">Aromático</a>
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
-                       
+                    </div>
                 </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
@@ -45,9 +77,16 @@
         <div class="search">
             <input type="text" placeholder="Buscar...">
         </div>
+
+        <!-- Ícone do Carrinho -->
+        <div class="cart-icon">
+            <a href="cart.html">
+                <img src="../photos/carrinho.png" alt="Carrinho">
+                <span id="cart-count">0</span>
+            </a>
+        </div>
     </header>
 
-    
     <!-- Produtos Família Olfativa -->
     <section class="products">
         <h2>Família Olfativa</h2>
@@ -57,21 +96,21 @@
                 <h3>Perfume Amadeirado Supremo</h3>
                 <p>Fragrância robusta e envolvente com notas amadeiradas e terrosas, perfeita para o inverno.</p>
                 <p class="price">R$ 220,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Amadeirado Supremo', 220, '../photos/Perfume Amadeirado Supremo.webp')">Comprar</button>
             </div>
             <div class="product-card">
                 <img src="../photos/Perfume Aromático Refrescantew.webp">
                 <h3>Perfume Aromático Refrescante</h3>
                 <p>Com notas frescas de ervas e especiarias, esse perfume oferece uma sensação de liberdade e frescor.</p>
                 <p class="price">R$ 180,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Aromático Refrescante', 180, '../photos/Perfume Aromático Refrescantew.webp')">Comprar</button>
             </div>
             <div class="product-card">
                 <img src="../photos/Perfume Floral Encantadora.webp">
                 <h3>Perfume Floral Encantadora</h3>
                 <p>Uma combinação delicada de flores frescas e suaves, perfeita para um toque feminino e sofisticado.</p>
                 <p class="price">R$ 160,00</p>
-                <button>Comprar</button>
+                <button onclick="addToCart('Perfume Floral Encantadora', 160, '../photos/Perfume Floral Encantadora.webp')">Comprar</button>
             </div>
         </div>
     </section>
@@ -104,8 +143,49 @@
             <a href="#" class="instagram">Instagram</a>
             <a href="#" class="twitter">Twitter</a>
         </div>
-    
     </footer>
+
+    <script>
+        // Função para adicionar produto ao carrinho
+        function addToCart(name, price, img) {
+            const product = {
+                name: name,
+                price: price,
+                img: img,
+                quantity: 1
+            };
+
+            // Recupera o carrinho atual do localStorage ou cria um novo
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Verifica se o produto já está no carrinho
+            const existingProductIndex = cart.findIndex(item => item.name === name);
+
+            if (existingProductIndex >= 0) {
+                // Caso o produto já exista no carrinho, atualiza a quantidade
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                // Caso contrário, adiciona o produto ao carrinho
+                cart.push(product);
+            }
+
+            // Atualiza o localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Atualiza o contador de itens no carrinho
+            updateCartCount();
+        }
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Atualizar o contador ao carregar a página
+        window.onload = updateCartCount;
+    </script>
 
 </body>
 </html>
