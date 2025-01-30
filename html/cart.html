@@ -6,6 +6,74 @@
     <title>Carrinho de Compras - Loja Só Importados</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Pop-up de pagamento */
+        .payment-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-popup .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .payment-popup button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .payment-popup button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mensagem de pagamento finalizado */
+        .payment-success {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 9999;
+        }
+
+        /* Estilo do carrinho */
+        .cart-container {
+            margin: 20px;
+        }
+
+        .btn-checkout {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-checkout:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
@@ -17,26 +85,6 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="promocoes.html">Promoções</a></li>
-                <li class="dropdown">
-                    <a href="#">Perfumarias</a>
-                    <div class="dropdown-content">
-                        <a href="feminino.html">Perfumaria Feminina</a>
-                        <a href="masculino.html">Perfumaria Masculina</a>
-                        <a href="infantil.html">Perfumaria Infantil</a>
-                        <a href="unissex.html">Perfumaria Unissex</a>
-                        <a href="casa.html">Perfumaria para Casa</a>
-                        <a href="kids.html">Kits</a>
-                        <a href="pocket-size.html">Pocket Size</a>
-                        <a href="body-splash.html">Body Splash</a>
-                        <a href="veganos.html">Veganos</a>
-                        <a href="universo-da-perfumaria.html">Universo da Perfumaria</a>
-                        <a href="familia-olfativa.html">Família Olfativa</a>
-                        <a href="amaderado.html">Amadeirado</a>
-                        <a href="aromatico.html">Aromático</a>
-                        <a href="chipre.html">Chipre</a>
-                        <a href="citrico.html">Cítrico</a>
-                       
-                </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
         </nav>
@@ -50,9 +98,24 @@
         <div class="cart-summary">
             <h3>Total:</h3>
             <p id="total-price">R$ 0,00</p>
-            <button class="btn-checkout">Finalizar Compra</button>
+            <button class="btn-checkout" onclick="showPaymentPopup()">Finalizar Compra</button>
         </div>
     </section>
+
+    <!-- Pop-up de formas de pagamento -->
+    <div id="payment-popup" class="payment-popup">
+        <div class="popup-content">
+            <h3>Escolha a Forma de Pagamento</h3>
+            <button onclick="processPayment('Cartão de Crédito')">Cartão de Crédito</button>
+            <button onclick="processPayment('Boleto Bancário')">Boleto Bancário</button>
+            <button onclick="processPayment('PayPal')">Pix</button>
+        </div>
+    </div>
+
+    <!-- Mensagem de pagamento finalizado -->
+    <div id="payment-success" class="payment-success">
+        Pagamento Finalizado com Sucesso!
+    </div>
 
     <footer>
         <div class="footer-links">
@@ -73,10 +136,10 @@
             const cartItemsList = document.getElementById('cart-items-list');
             cartItemsList.innerHTML = '';
 
+            let totalPrice = 0;
             if (cart.length === 0) {
                 cartItemsList.innerHTML = '<p>Seu carrinho está vazio.</p>';
             } else {
-                let totalPrice = 0;
                 cart.forEach((item, index) => {
                     let itemTotal = item.price * item.quantity;
                     totalPrice += itemTotal;
@@ -99,11 +162,11 @@
                     `;
                     cartItemsList.appendChild(cartItemElement);
                 });
-
-                // Atualizar o preço total
-                const totalPriceElement = document.getElementById('total-price');
-                totalPriceElement.textContent = `R$ ${totalPrice.toFixed(2)}`;
             }
+
+            // Atualizar o preço total
+            const totalPriceElement = document.getElementById('total-price');
+            totalPriceElement.textContent = `R$ ${totalPrice.toFixed(2)}`;
         }
 
         // Função para remover item do carrinho
@@ -126,6 +189,26 @@
 
         // Exibir os itens do carrinho ao carregar a página
         displayCartItems();
+
+        // Função para exibir o pop-up de pagamento
+        function showPaymentPopup() {
+            document.getElementById('payment-popup').style.display = 'flex';
+        }
+
+        // Função para processar o pagamento e exibir a mensagem
+        function processPayment(paymentMethod) {
+            // Exibir a mensagem de pagamento finalizado
+            const successMessage = document.getElementById('payment-success');
+            successMessage.style.display = 'block';
+
+            // Fechar o pop-up de pagamento
+            document.getElementById('payment-popup').style.display = 'none';
+
+            // Redirecionar para a página inicial após 3 segundos
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 3000);
+        }
     </script>
 </body>
 </html>
