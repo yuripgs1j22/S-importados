@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho de Compras - Loja Só Importados</title>
     <link rel="stylesheet" href="../css/style.css">
-
-      
 </head>
 <body>
     <!-- Cabeçalho -->
@@ -18,26 +16,6 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="promocoes.html">Promoções</a></li>
-                <li class="dropdown">
-                    <a href="#">Perfumarias</a>
-                    <div class="dropdown-content">
-                        <a href="feminino.html">Perfumaria Feminina</a>
-                        <a href="masculino.html">Perfumaria Masculina</a>
-                        <a href="infantil.html">Perfumaria Infantil</a>
-                        <a href="unissex.html">Perfumaria Unissex</a>
-                        <a href="casa.html">Perfumaria para Casa</a>
-                        <a href="kids.html">Kits</a>
-                        <a href="pocket-size.html">Pocket Size</a>
-                        <a href="body-splash.html">Body Splash</a>
-                        <a href="veganos.html">Veganos</a>
-                        <a href="universo-da-perfumaria.html">Universo da Perfumaria</a>
-                        <a href="familia-olfativa.html">Família Olfativa</a>
-                        <a href="amaderado.html">Amadeirado</a>
-                        <a href="aromatico.html">Aromático</a>
-                        <a href="chipre.html">Chipre</a>
-                        <a href="citrico.html">Cítrico</a>
-                       
-                </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
         </nav>
@@ -46,7 +24,6 @@
     <!-- Carrinho de Compras -->
     <section class="cart-container">
         <h2>Seu Carrinho de Compras</h2>
-
         <div id="cart-items-list"></div>
 
         <div class="cart-summary">
@@ -64,12 +41,6 @@
                 <li><a href="#">Termos de Uso</a></li>
             </ul>
         </div>
-        <div class="social-media">
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-        </div>
-       
     </footer>
 
     <script>
@@ -85,18 +56,25 @@
                 cartItemsList.innerHTML = '<p>Seu carrinho está vazio.</p>';
             } else {
                 let totalPrice = 0;
-                cart.forEach(item => {
-                    totalPrice += item.price;
+                cart.forEach((item, index) => {
+                    let itemTotal = item.price * item.quantity;
+                    totalPrice += itemTotal;
+
                     const cartItemElement = document.createElement('div');
                     cartItemElement.classList.add('cart-item');
                     cartItemElement.innerHTML = `
                         <div class="cart-item-info">
-                            <img src="${item.img}" alt="${item.name}">
-                            <div>
-                                <h4>${item.name}</h4>
-                                <p>R$ ${item.price.toFixed(2)}</p>
-                            </div>
+                            <img src="${item.img}" alt="${item.name}" width="80" height="80"> <!-- Exibindo a imagem -->
+                            <h4>${item.name}</h4>
+                            <p>R$ ${item.price.toFixed(2)} x ${item.quantity}</p>
+                            <p>Total: R$ ${itemTotal.toFixed(2)}</p>
                         </div>
+                        <div class="quantity-control">
+                            <button onclick="updateQuantity(${index}, 'decrease')">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${index}, 'increase')">+</button>
+                        </div>
+                        <span class="remove-item" onclick="removeItem(${index})">X</span>
                     `;
                     cartItemsList.appendChild(cartItemElement);
                 });
@@ -105,6 +83,24 @@
                 const totalPriceElement = document.getElementById('total-price');
                 totalPriceElement.textContent = `R$ ${totalPrice.toFixed(2)}`;
             }
+        }
+
+        // Função para remover item do carrinho
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        // Função para atualizar a quantidade de itens no carrinho
+        function updateQuantity(index, action) {
+            if (action === 'increase') {
+                cart[index].quantity++;
+            } else if (action === 'decrease' && cart[index].quantity > 1) {
+                cart[index].quantity--;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
         }
 
         // Exibir os itens do carrinho ao carregar a página

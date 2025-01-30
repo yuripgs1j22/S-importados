@@ -4,11 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Loja de perfumes femininos, masculinos, unissex, para casa, kids, pocket size, body splash, veganos, universo da perfumaria, família olfativa, amadeirado e mais. Encontre perfumes sofisticados para todas as ocasiões.">
+    <meta name="description" content="Loja de perfumes femininos, masculinos, unissex, para casa, kids, pocket size, body splash, veganos, universo da perfumaria, família olfativa, amadeirado e mais. Encontre perfumes sofisticados para todas as ocasiões.">
     <title>Perfumes Amadeirados - Loja Online</title>
     <link rel="stylesheet" href="../css/sobrenos.css">
     <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* Estilos para o ícone do carrinho */
+        .cart-icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-icon img {
+            width: 40px; /* Tamanho pequeno */
+            height: 40px; /* Tamanho pequeno */
+            border-radius: 50%; /* Deixa a imagem arredondada */
+            border: 2px solid #fff; /* Borda branca para dar destaque */
+        }
+
+        /* Estilo para o contador de itens */
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 50%;
+            min-width: 18px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,7 +72,7 @@
                         <a href="aromatico.html">Aromático</a>
                         <a href="chipre.html">Chipre</a>
                         <a href="citrico.html">Cítrico</a>
-                       
+                    </div>
                 </li>
                 <li><a href="sobrenos.html">Sobre Nós</a></li>
             </ul>
@@ -48,54 +80,41 @@
         <div class="search">
             <input type="text" placeholder="Buscar...">
         </div>
+
+        <!-- Botão do Carrinho -->
+        <div class="cart-icon">
+            <a href="cart.html">
+                <img src="../photos/carrinho.png" alt="Carrinho">
+                <span id="cart-count">0</span> <!-- Contador de itens no carrinho -->
+            </a>
+        </div>
     </header>
-
-
 
     <!-- Produtos Amadeirados -->
     <section class="products">
         <h2>Perfumes Amadeirados</h2>
         <div class="product-list">
             <div class="product-card">
-                <img src="../photos/Perfume Amadeirado Clássico.webp">
+                <img src="../photos/Perfume Amadeirado Clássico.webp" alt="Perfume Amadeirado Clássico">
                 <h3>Perfume Amadeirado Clássico</h3>
-                <p>Uma fragrância intensa e envolvente com notas de sândalo, cedro e vetiver, perfeita para ocasiões
-                    sofisticadas.</p>
+                <p>Uma fragrância intensa e envolvente com notas de sândalo, cedro e vetiver, perfeita para ocasiões sofisticadas.</p>
                 <p class="price">R$ 280,00</p>
-                <button>Adicionar ao carrinho</button>
+                <button onclick="addToCart('Perfume Amadeirado Clássico', 280.00, '../photos/Perfume Amadeirado Clássico.webp')">Adicionar ao carrinho</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Perfume Amadeirado Dourado.jpg">
+                <img src="../photos/Perfume Amadeirado Dourado.jpg" alt="Perfume Amadeirado Dourado">
                 <h3>Perfume Amadeirado Dourado</h3>
-                <p>Com um toque de musgo e madeiras raras, esse perfume oferece uma fragrância profunda e sofisticada.
-                </p>
+                <p>Com um toque de musgo e madeiras raras, esse perfume oferece uma fragrância profunda e sofisticada.</p>
                 <p class="price">R$ 350,00</p>
-                <button>Adicionar ao carrinho</button>
+                <button onclick="addToCart('Perfume Amadeirado Dourado', 350.00, '../photos/Perfume Amadeirado Dourado.jpg')">Adicionar ao carrinho</button>
             </div>
             <div class="product-card">
-                <img src="../photos/Perfume Amadeirado Intenso.jpg">
+                <img src="../photos/Perfume Amadeirado Intenso.jpg" alt="Perfume Amadeirado Intenso">
                 <h3>Perfume Amadeirado Intenso</h3>
-                <p>Perfume robusto e marcante com notas de madeira de oud, perfeito para quem busca algo exclusivo e
-                    duradouro.</p>
+                <p>Perfume robusto e marcante com notas de madeira de oud, perfeito para quem busca algo exclusivo e duradouro.</p>
                 <p class="price">R$ 420,00</p>
-                <button>Adicionar ao carrinho</button>
+                <button onclick="addToCart('Perfume Amadeirado Intenso', 420.00, '../photos/Perfume Amadeirado Intenso.jpg')">Adicionar ao carrinho</button>
             </div>
-        </div>
-    </section>
-
-    <!-- Sobre Nós -->
-    <section class="sobre-nos">
-        <h1>Sobre a Nossa Loja</h1>
-        <div class="container">
-            <p>Em nossa loja, você encontra uma seleção de perfumes amadeirados exclusivos, com fragrâncias sofisticadas
-                que combinam notas intensas de madeiras raras e especiarias. Seja para um evento especial ou para o dia
-                a dia, temos o perfume amadeirado ideal para você.</p>
-            <h2>Por que Escolher Nossos Perfumes Amadeirados?</h2>
-            <ul>
-                <li>Perfumes com notas de madeiras nobres e especiarias, perfeitos para uma fragrância duradoura.</li>
-                <li>Fragrâncias intensas, ideais para quem busca sofisticação e elegância.</li>
-                <li>Opções para todos os gostos dentro da categoria amadeirada.</li>
-            </ul>
         </div>
     </section>
 
@@ -117,6 +136,48 @@
             <img src="images/payment-methods.png" alt="Métodos de pagamento">
         </div>
     </footer>
+
+    <script>
+        // Função para adicionar produto ao carrinho
+        function addToCart(name, price, img) {
+            const product = {
+                name: name,
+                price: price,
+                img: img,
+                quantity: 1
+            };
+
+            // Recupera o carrinho atual do localStorage ou cria um novo
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Verifica se o produto já está no carrinho
+            const existingProductIndex = cart.findIndex(item => item.name === name);
+
+            if (existingProductIndex >= 0) {
+                // Caso o produto já exista no carrinho, atualiza a quantidade
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                // Caso contrário, adiciona o produto ao carrinho
+                cart.push(product);
+            }
+
+            // Atualiza o localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Atualiza o contador de itens no carrinho
+            updateCartCount();
+        }
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        // Atualizar o contador ao carregar a página
+        window.onload = updateCartCount;
+    </script>
 
 </body>
 

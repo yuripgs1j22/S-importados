@@ -133,32 +133,39 @@
     </footer>
 
     <script>
-        // Carrinho de Compras
-        let cart = [];
-        const cartCount = document.getElementById('cart-count');
         
-        // Função para atualizar o contador do carrinho
-        function updateCartCount() {
-            cartCount.textContent = cart.length;
-        }
+    // Recuperar carrinho do localStorage ou iniciar como um array vazio
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = document.getElementById('cart-count');
 
-        // Função para adicionar ao carrinho
-        function addToCart(productName, productPrice) {
-            const product = { name: productName, price: parseFloat(productPrice) };
-            cart.push(product);
-            updateCartCount();
-        }
+    // Função para atualizar o contador do carrinho
+    function updateCartCount() {
+        cartCount.textContent = cart.length;
+    }
 
-        // Adicionar eventos para os botões "Adicionar ao Carrinho"
-        const addButtons = document.querySelectorAll('.add-to-cart');
-        addButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const productName = button.getAttribute('data-product');
-                const productPrice = button.getAttribute('data-price');
-                addToCart(productName, productPrice);
-            });
+    // Função para adicionar ao carrinho
+    function addToCart(productName, productPrice) {
+        const product = { name: productName, price: parseFloat(productPrice) };
+        cart.push(product);
+        // Salvar o carrinho no localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    // Adicionar eventos para os botões "Adicionar ao Carrinho"
+    const addButtons = document.querySelectorAll('.add-to-cart');
+    addButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productName = button.getAttribute('data-product');
+            const productPrice = button.getAttribute('data-price');
+            addToCart(productName, productPrice);
         });
-        
-    </script>
+    });
+
+    // Atualizar o contador de itens no carrinho assim que a página for carregada
+    updateCartCount();
+</script>
+
+
 </body>
 </html>
