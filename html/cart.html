@@ -150,7 +150,7 @@
                     cartItemElement.classList.add('cart-item');
                     cartItemElement.innerHTML = `
                         <div class="cart-item-info">
-                            <img src="${item.img}" alt="${item.name}" width="80" height="80"> <!-- Exibindo a imagem -->
+                            <img src="${item.img}" alt="${item.name}" width="80" height="80">
                             <h4>${item.name}</h4>
                             <p>R$ ${item.price.toFixed(2)} x ${item.quantity}</p>
                             <p>Total: R$ ${itemTotal.toFixed(2)}</p>
@@ -181,10 +181,11 @@
         // Função para atualizar a quantidade de itens no carrinho
         function updateQuantity(index, action) {
             if (action === 'increase') {
-                cart[index].quantity++;
+                cart[index].quantity++; // Incrementa a quantidade
             } else if (action === 'decrease' && cart[index].quantity > 1) {
-                cart[index].quantity--;
+                cart[index].quantity--; // Diminui a quantidade, mas não deixa ficar negativa
             }
+            // Atualiza o localStorage e exibe os itens novamente
             localStorage.setItem('cart', JSON.stringify(cart));
             displayCartItems();
         }
